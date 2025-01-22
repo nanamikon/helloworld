@@ -1,0 +1,23 @@
+version: 1.0
+runtime: go1.x
+build:
+  commands:
+    build:
+      - go build -o server
+
+run:
+  runtime-version: 1.x
+  command: ./server
+  network:
+    port: 8080
+  env:
+    - name: PORT
+      value: "8080"
+
+health_check:
+  protocol: HTTP
+  path: "/"
+  interval: 10
+  timeout: 5
+  healthy_threshold: 2
+  unhealthy_threshold: 2
