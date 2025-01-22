@@ -1,21 +1,13 @@
 package main
-
 import (
     "fmt"
     "net/http"
 )
 
 func main() {
-    // 注册处理函数
-    http.HandleFunc("/", helloHandler)
-
-    // 启动服务器在 8080 端口
-    fmt.Println("Server starting on http://localhost:8080")
-    if err := http.ListenAndServe(":8080", nil); err != nil {
-        fmt.Printf("Server error: %v\n", err)
-    }
-}
-
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello World")
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprint(w, "<h1>Welcome to App Runner</h1>")
+    })
+    fmt.Println("Starting the server on :3000...")
+    http.ListenAndServe(":3000", nil)
 }
